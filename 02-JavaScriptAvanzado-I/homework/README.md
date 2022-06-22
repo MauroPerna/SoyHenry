@@ -22,7 +22,7 @@ var c = function(a, b, c) {
     var x = 5;
   }
   f(a,b,c);
-  console.log(b);
+  console.log(b); // 9
 }
 c(8,9,10);
 console.log(b); // 10
@@ -31,8 +31,8 @@ console.log(x); // 1
 
 ```javascript
 console.log(bar); // undefined
-console.log(baz); // error
-foo(); // Hola!
+console.log(baz); // error -> aca se corta la ejecucion 
+foo(); // Hola! -> devolveria esto pero se corto la ejecucion arriba.
 function foo() { console.log('Hola!'); }
 var bar = 1;
 baz = 2;
@@ -87,7 +87,7 @@ console.log(pm); // Franco
 {}[0] // [0]
 parseInt("09") // 9
 5 && 2 // 2
-2 && 5 // 2
+2 && 5 // 5
 5 || 0 // 5
 0 || 5 // 5
 [3]+[3]-[10] // 23
@@ -112,7 +112,7 @@ function test() {
       return 2;
    }
 }
-
+|
 test();
 ```
 

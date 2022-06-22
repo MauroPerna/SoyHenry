@@ -25,6 +25,26 @@
 
 ## Closures
 
+----------------------------------------------------------------------------------------------------------------------
+
+NOTAS MAURO: Un closure es una funcion que retorna una o mas funciones (en forma de array o objeto). Donde cada instancia de la funcion guarda un contexto de ejecucion propio gracias a que recibe algunas variables heredadas como es el caso de las variables que paso como parametros a la funcion padre como tambien las variables declaradas dentro del contexto de ejecucion de la funcion padre o creadora.
+
+```javascript
+function sumador(base) {
+  var result = 0;
+  function sumadora() {
+    result += base;
+    return result;
+  }
+  function reset() {
+    result = 0; 
+    return result;
+  }
+  return { sumadora, reset };
+}
+```
+-----------------------------------------------------------------------------------------------------------------------
+
 Otro tema importante en JavaScript es `closures`. Veamos a que se refieren con un ejemplo:
 
 ```javascript
