@@ -172,8 +172,10 @@ describe('HashTable', function() {
 
   it('deberia devolver booleanos para el metodo #hasKey', function() {
     hashTable.set('foobar', 'fluf cats');
+    // hashTable.set('barfoo', 'cats');
     expect(hashTable.hasKey('foobar')).toBe(true);
     expect(hashTable.hasKey('raboof')).toBe(false);
+    // expect(hashTable.hasKey('barfoo')).toBe(true);
   });
 
 });

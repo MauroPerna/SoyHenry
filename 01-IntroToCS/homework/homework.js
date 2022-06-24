@@ -1,26 +1,36 @@
 'use strict'
 
+// function BinarioADecimal(num) {
+//   // tu codigo aca
+//   // return Parseint (num,2);
+//   let newNum = num.split('').reverse();
+//   // num = "10" -> ['1', '0'] -> ['0', '1']
+//   let array = [];
+//   for (let i = 0; i < newNum.length; i++) {
+//     const numDecimal = newNum[i] * Math.pow(2, i);
+//     array.push(numDecimal);
+//     // array = [0, 2] 
+//   }
+//   const valInicial = 0;
+//   const sumatoria = array.reduce(
+//     (valorPrevio, valorActual) => valorPrevio + valorActual,
+//     valInicial
+//   );
+//   // let sumatoria = 0;
+//   // for (let j = 0; j < array.length; j++) {
+//   //   sumatoria += array[j];
+//   // }
+//   return sumatoria;
+// }
+
+
+// Binario a Decimal con recursividad
 function BinarioADecimal(num) {
-  // tu codigo aca
-  // return Parseint (num,2);
-  let newNum = num.split('').reverse();
-  // num = "10" -> ['1', '0'] -> ['0', '1']
-  let array = [];
-  for (let i = 0; i < newNum.length; i++) {
-    const numDecimal = newNum[i] * Math.pow(2, i);
-    array.push(numDecimal);
-    // array = [0, 2] 
-  }
-  const valInicial = 0;
-  const sumatoria = array.reduce(
-    (valorPrevio, valorActual) => valorPrevio + valorActual,
-    valInicial
-  );
-  // let sumatoria = 0;
-  // for (let j = 0; j < array.length; j++) {
-  //   sumatoria += array[j];
-  // }
-  return sumatoria;
+  var res = 0;
+  if(num.length === 0) return res;
+  var newNum = num.slice(1);
+  res = num.charAt(0) * Math.pow(2, num.length - 1);
+  return BinarioADecimal(newNum) + res;
 }
 
 function DecimalABinario(num) {

@@ -46,10 +46,15 @@ class Queue {
 
   constructor() {
     this.array = []; // Preguntar porque se tiene que declarar como this.items
+    /* estas construyendo una función constructora 
+    que le decis que tiene como valor inicial un array vacio. 
+    y el this lo usamos para en otros metodos poder ir refiriendonos a ese array y poder manipularlo
+    */
   }
 
   enqueue(item) {
     return this.array.push(item);
+    // estas vienen a ser operaciones que se realizan sobre el array. Sobre cual array? sobre this.array
   }
 
   dequeue() {
