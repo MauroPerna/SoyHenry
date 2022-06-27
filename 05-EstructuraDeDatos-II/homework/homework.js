@@ -57,11 +57,6 @@ LinkedList.prototype.remove = function () {
 	// si la lista tiene mas de un elemento
 	while(current.next.next) {
 		// 5 -> 10 -> 25 -> null
-		if(current.next === null) {
-			let node = current;
-			this.head = null;
-			return node.value;
-		}
 		current = current.next;
 	}
 	var lastItem = current.next; // 25
