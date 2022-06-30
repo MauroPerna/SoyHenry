@@ -44,7 +44,7 @@ describe('countProps', () => {
             b: 2,
             c: [1, {a: 1}, 'Franco']
             }
-        expect(countProps(objeto)).toBe(10)
+        expect(countProps(objeto)).toBe(11)
     })
 })
 

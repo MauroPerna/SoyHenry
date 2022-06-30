@@ -16,7 +16,25 @@ const {
 
 var countArray = function(array) {
     // Tu código aca:
-    
+    // primero necesito recorrer el array.
+    // luego si el elemento es un array necesito meterme adentro y recorrer ese subarreglo
+    // si dentro de ese subarreglo hay otro array necesito meterme dentro y recorrerlo para obtener el resultado.
+    var resultado = array.reduce((previousValue, currentValue) => {
+        if(typeof previousValue === 'number' && typeof currentValue === 'number') {
+            return previousValue + currentValue}
+        if(Array.isArray(previousValue) || Array.isArray(currentValue)) {
+            if(Array.isArray(previousValue) && Array.isArray(currentValue)) {
+                return countArray(previousValue) + countArray(currentValue);
+            }
+            if(Array.isArray(previousValue)) {
+                return countArray(previousValue) + currentValue;
+            }
+            if(Array.isArray(currentValue)) {
+                return previousValue + countArray(currentValue);
+            }
+        }
+    });
+    return resultado;
 }
 
 
@@ -39,6 +57,25 @@ var countArray = function(array) {
 
 var countProps = function(obj) {
     // Tu código aca:
+    var qProps = 0;
+    Object.keys(obj).forEach((key) => {
+        if(typeof obj[key] === 'object') {
+            if(Array.isArray(obj[key])) {
+                // si el value del una propiedad es un array necesitamos recorrer el array para saber si
+                // adentro hay otro objeto.
+                for (let i = 0; i < obj[key].length; i++) {
+                    if(typeof obj[key][i] === 'object') {
+                        qProps += countProps(obj[key][i]);
+                    }
+                }
+            }
+            if(!Array.isArray(obj[key])){ 
+                qProps += countProps(obj[key]);
+            }
+        }
+        qProps++;
+    });
+    return qProps;
 
 }
 
@@ -53,7 +90,21 @@ var countProps = function(obj) {
 
 LinkedList.prototype.changeNotNumbers = function(){
     // Tu código aca:
+    // la funcion isNaN intenta convertir el parámetro pasado a un número. 
+    // Si el parámetro no se puede convertir, devuelve true; en caso contrario, devuelve false.
+    //['uno'] -> ['2'] -> ['3'] -> ['cuatro'] -> ['cinco']
+    var contador = 0;
+    var nodoActual = this.head;
+    while(nodoActual === null) return null;
+    while(nodoActual) {
+        if(isNaN(nodoActual.value)) {
+            nodoActual.value = 'Kiricocho';
+            contador++;
+        }
+        nodoActual = nodoActual.next;
+    }
 
+    return contador;
 }
 
 
@@ -67,8 +118,33 @@ LinkedList.prototype.changeNotNumbers = function(){
 
 var mergeQueues = function(queueOne, queueTwo) {
     // Tu código aca:
+    // queueOne = [1, 3, 5, 7, 9]
+    // queueTwo = [2, 4, 6]
+    var newQueue = new Queue();
+    
+    newQueue.enqueue(queueOne.dequeue());
+    newQueue.enqueue(queueTwo.dequeue());
+    while(queueOne.size() || queueTwo.size()) {
+        if(queueOne.size()) newQueue.enqueue(queueOne.dequeue());
+        if(queueTwo.size()) newQueue.enqueue(queueTwo.dequeue());
+    }
 
+    return newQueue;
 }
+
+// var q1 = new Queue();
+// q1.enqueue(1);
+// q1.enqueue(3);
+// q1.enqueue(5);
+// q1.enqueue(7);
+// q1.enqueue(9);
+// console.log(q1);
+// var q2 = new Queue();
+// q2.enqueue(2);
+// q2.enqueue(4);
+// q2.enqueue(6);
+// console.log(q1);
+// console.log(mergeQueues(q1, q2));
 
 
 // Implementar la funcion closureMult que permita generar nuevas funciones que representen
@@ -82,15 +158,31 @@ var mergeQueues = function(queueOne, queueTwo) {
 
 var closureMult = function(multiplier) {
     // Tu código aca:
-
+    return function(num) {
+        var resultado = multiplier * num;
+        return resultado;
+    }
 }
 
 // Implementar el método sum dentro del prototype de BinarySearchTree
 // que debe retornar la suma total de los valores dentro de cada nodo del arbol
-BinarySearchTree.prototype.sum = function() {
+BinarySearchTree.prototype.sum = function(result = 0, array = []) {
     // Tu código aca:
-
+    result += this.value;
+    if(this.left !== null) array.push(this.left);
+	if(this.right !== null) array.push(this.right);
+    if(array.length > 0) return array.shift().sum(result, array);
+    return result;
 }
+
+var bst = new BinarySearchTree(15);
+bst.insert(10);
+bst.insert(17);
+bst.insert(5);
+bst.insert(7);
+bst.insert(3);
+bst.insert(25);
+console.log(bst.sum());
 
 module.exports = {
     countArray,
